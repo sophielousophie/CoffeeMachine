@@ -1,5 +1,6 @@
 package org.formation.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.formation.dto.CoffeeCreateDto;
 import org.formation.dto.CoffeeDto;
@@ -21,7 +22,7 @@ public class CoffeeController {
     private final CoffeeService service;
 
     @PostMapping
-    CoffeeDto create(@RequestBody CoffeeCreateDto dto) {
+    CoffeeDto create(@RequestBody @Valid CoffeeCreateDto dto) {
         return service.create(dto);
     }
 
