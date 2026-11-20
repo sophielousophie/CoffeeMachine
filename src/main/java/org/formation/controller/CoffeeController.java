@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.formation.dto.CoffeeCreateDto;
 import org.formation.dto.CoffeeDto;
+import org.formation.dto.CoffeeUpdateDto;
 import org.formation.entity.Coffee;
 import org.formation.repository.CoffeeRepository;
 import org.formation.service.CoffeeService;
@@ -38,6 +39,13 @@ public class CoffeeController {
         return service.oneCoffee(id)
                 .map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
                 ///.map(coffee ->  ResponseEntity.ok(coffee)); Autre possibilité
+    }
+
+    @PatchMapping("{id}") /// variable du chemin
+    ResponseEntity<CoffeeDto> update(@PathVariable Long id, @RequestBody @Valid CoffeeUpdateDto dto){/// Au lieu de Optional
+        return service.update(id, dto)
+                .map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+        ///.map(coffee ->  ResponseEntity.ok(coffee)); Autre possibilité
     }
 
 }
